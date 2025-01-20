@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../redux/authSlice";
 import api from "../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import LoadingIndicator from "./LoadingIndicator";
@@ -11,16 +13,23 @@ function Form({ route, method }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const name = method === "login" ? "Login" : "Register";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log({ username, password });
 
     try {
         const res = await api.post(route, { username, password })
+
         if (method === "login") {
+            dispatch(loginSuccess({
+              user: res.data.user,
+              token: res.data.access
+            }))
             localStorage.setItem(ACCESS_TOKEN, res.data.access);
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
             navigate("/");
@@ -29,7 +38,8 @@ function Form({ route, method }) {
         }
     }
     catch (error) {
-        alert(error)
+      console.error("Error details:", error.response?.data || error.message);
+      alert(error.response?.data?.detail || error.message);
     }
     finally {
         setLoading(false)
