@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import "./App.css"
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import Profile from './pages/Profile'
 
 function Logout() {
   localStorage.clear()
@@ -20,6 +21,7 @@ function RegisterAndLogout(){
 }
 
 function App() {
+  
 
   return (
     <Provider store={store}>
@@ -29,6 +31,7 @@ function App() {
           <Route path="/register" element={<RegisterAndLogout />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

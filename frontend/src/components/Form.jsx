@@ -32,6 +32,7 @@ function Form({ route, method }) {
             }))
             localStorage.setItem(ACCESS_TOKEN, res.data.access);
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+            localStorage.setItem("user", JSON.stringify(res.data.user));
             navigate("/");
         } else {
             navigate("/login");
