@@ -60,3 +60,14 @@ class ProfileImageUploadView(APIView):
             return Response(UserSerializer(user).data)
         except CustomUser.DoesNotExist:
             return Response({"error": "User not found"}, status=404)
+
+
+class UserListCreateView(generics.ListCreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser]

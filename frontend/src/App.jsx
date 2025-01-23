@@ -12,6 +12,7 @@ import Profile from './pages/Profile'
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import NotAuthorized from './pages/NotAuthorized'
+import CreateUser from './pages/CreateUser'
 
 function Logout() {
   localStorage.clear()
@@ -36,6 +37,7 @@ function App() {
           <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute><AdminDashboard /></AdminProtectedRoute>} />
+          <Route path="/admin/create" element={<AdminProtectedRoute><CreateUser /></AdminProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
           <Route path="/not-authorized" element={<NotAuthorized />} />
         </Routes>
