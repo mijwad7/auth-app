@@ -67,6 +67,10 @@ class UserListCreateView(generics.ListCreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAdminUser]
 
+    def get_queryset(self):
+        query = self.request.query_params.get("q", "")
+        return self.queryset.filter(username__icontains=query)
+
 class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
