@@ -71,7 +71,6 @@ const AdminDashboard = () => {
             <thead className="thead-dark">
               <tr>
                 <th>Username</th>
-                <th>Email</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -79,7 +78,6 @@ const AdminDashboard = () => {
               {users.map((user) => (
                 <tr key={user.id}>
                   <td>{user.username}</td>
-                  <td>{user.email}</td>
                   <td>
                     <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(user)}>
                       Edit
