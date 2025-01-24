@@ -9,6 +9,7 @@ const AdminDashboard = () => {
 
   const [editingUser, setEditingUser] = useState(null);
   const [updatedUsername, setUpdatedUsername] = useState("");
+  const [updatedEmail, setUpdatedEmail] = useState("");
 
   // State for creating a new user
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -27,12 +28,13 @@ const AdminDashboard = () => {
   const handleEdit = (user) => {
     setEditingUser(user);
     setUpdatedUsername(user.username);
+    setUpdatedEmail(user.email);
   };
 
   const handleSave = () => {
     if (!editingUser) return;
 
-    const userData = { username: updatedUsername };
+    const userData = { username: updatedUsername, email: updatedEmail };
     dispatch(editUser({ userId: editingUser.id, userData }));
     setEditingUser(null);
   };
@@ -103,8 +105,16 @@ const AdminDashboard = () => {
                 <input
                   type="text"
                   className="form-control"
+                  placeholder="Username"
                   value={updatedUsername}
                   onChange={(e) => setUpdatedUsername(e.target.value)}
+                />
+                <input
+                  type="email"
+                  className="form-control mt-2"
+                  placeholder="Email"
+                  value={updatedEmail}
+                  onChange={(e) => setUpdatedEmail(e.target.value)}
                 />
               </div>
               <div className="text-center mt-4">
