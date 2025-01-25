@@ -46,8 +46,6 @@ const Profile = () => {
       alert("Error updating profile image. Please try again.");
     }
   };
-  // D:\Work\React\auth-app\frontend\src\pages\Profile.jsx
-  // D:\Work\React\auth-app\backend\media\profile_images\istockphoto-1300845620-612x612.jpg
 
   const profileImageUrl = user.profile_image
     ? `http://127.0.0.1:8000/${user.profile_image}`
